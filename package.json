@@ -1,13 +1,17 @@
 {
   "name": "exit-arman",
   "version": "1.0.0",
-  "description": "EXIT ARMAN File Server",
+  "description": "Production-ready Meta Messenger broadcasting tool with dark 3D UI",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^5.1.0",
-    "multer": "^2.0.2"
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
