@@ -1,120 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1"
->
-
-<title>EXIT ARMAN • Messenger Server</title>
+<title>EXIT ARMAN INSIDE</title>
 
 <style>
-
 *{
   box-sizing:border-box;
 }
 
-body{
+html,body{
   margin:0;
+  min-height:100%;
+}
+
+body{
   min-height:100vh;
-
-  font-family:Arial,sans-serif;
-
-  color:white;
+  font-family:Inter,Arial,Helvetica,sans-serif;
+  color:#fff;
 
   background:
     radial-gradient(
       circle at 10% 10%,
-      #173c63,
-      transparent 35%
+      rgba(0,174,255,.18),
+      transparent 32%
     ),
     radial-gradient(
-      circle at 90% 90%,
-      #35135d,
+      circle at 90% 85%,
+      rgba(132,55,255,.20),
       transparent 35%
     ),
-    #050812;
+    linear-gradient(
+      145deg,
+      #03060d,
+      #07101e 50%,
+      #04050c
+    );
 
   display:flex;
-  align-items:center;
   justify-content:center;
-
-  padding:20px;
+  padding:30px 16px;
 }
 
-.container{
+.wrapper{
   width:100%;
-  max-width:600px;
+  max-width:650px;
 }
+
+/* =====================
+   HEADER
+===================== */
 
 .header{
   text-align:center;
-  margin-bottom:20px;
+  margin-bottom:25px;
 }
 
 .logo{
-  font-size:38px;
-  font-weight:900;
-  letter-spacing:4px;
+  position:relative;
+  display:inline-block;
 
-  background:
-    linear-gradient(
-      90deg,
-      #55d8ff,
-      #7f6cff,
-      #d85cff
-    );
+  font-size:42px;
+  font-weight:950;
+  letter-spacing:5px;
 
-  -webkit-background-clip:text;
-  color:transparent;
+  color:#fff;
+
+  text-shadow:
+    0 0 5px rgba(100,210,255,.9),
+    0 0 15px rgba(70,170,255,.8),
+    0 0 35px rgba(110,75,255,.7),
+    0 0 65px rgba(130,60,255,.5);
+
+  animation:glow 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes glow{
+  from{
+    text-shadow:
+      0 0 5px rgba(100,210,255,.7),
+      0 0 15px rgba(70,170,255,.6),
+      0 0 30px rgba(110,75,255,.5);
+  }
+
+  to{
+    text-shadow:
+      0 0 8px rgba(120,225,255,1),
+      0 0 22px rgba(75,170,255,.9),
+      0 0 45px rgba(125,70,255,.8),
+      0 0 75px rgba(145,60,255,.5);
+  }
 }
 
 .subtitle{
-  color:#8997ae;
-  margin-top:8px;
+  margin-top:9px;
+  color:#9aa9bf;
+  font-size:13px;
+  letter-spacing:2px;
 }
+
+/* =====================
+   CARD
+===================== */
 
 .card{
-  background:rgba(9,14,27,.82);
+  padding:28px;
+
+  border-radius:27px;
 
   border:1px solid
-  rgba(255,255,255,.1);
+  rgba(255,255,255,.11);
 
-  border-radius:25px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(17,25,43,.88),
+      rgba(5,9,18,.90)
+    );
 
-  padding:25px;
-
-  backdrop-filter:blur(20px);
+  backdrop-filter:blur(22px);
 
   box-shadow:
-    0 30px 80px
-    rgba(0,0,0,.5);
+    0 30px 100px rgba(0,0,0,.55),
+    inset 0 1px 0 rgba(255,255,255,.04);
 }
 
-.title{
-  color:#9aa9c0;
-  font-size:13px;
+/* =====================
+   SECTION
+===================== */
+
+.section{
+  margin-bottom:23px;
+}
+
+.section-title{
+  margin-bottom:9px;
+
+  color:#aebbd0;
+
+  font-size:12px;
+  font-weight:800;
+
+  letter-spacing:1.4px;
   text-transform:uppercase;
-  margin-bottom:10px;
 }
 
-.filebox{
+/* =====================
+   INPUTS
+===================== */
+
+input[type="text"]{
+  width:100%;
+
+  padding:15px 16px;
+
+  border-radius:14px;
+
+  border:1px solid #273653;
+
+  outline:none;
+
+  background:#060b15;
+
+  color:#fff;
+
+  font-size:14px;
+
+  transition:.2s;
+}
+
+input[type="text"]::placeholder{
+  color:#66758d;
+}
+
+input[type="text"]:focus{
+  border-color:#5d7cff;
+
+  box-shadow:
+    0 0 0 3px rgba(93,124,255,.10),
+    0 0 20px rgba(75,110,255,.12);
+}
+
+/* =====================
+   FILE
+===================== */
+
+.file-box{
+  padding:19px;
+
+  border-radius:16px;
+
   border:1px dashed #40516d;
 
-  background:#080e1b;
-
-  padding:20px;
-
-  border-radius:15px;
+  background:#060b15;
 }
 
-input[type=file]{
+input[type="file"]{
   width:100%;
-  color:white;
+  color:#c8d4e5;
+}
+
+/* =====================
+   BUTTONS
+===================== */
+
+.buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:11px;
+  margin-top:8px;
 }
 
 button{
@@ -122,24 +218,35 @@ button{
 
   border:0;
 
-  border-radius:13px;
+  border-radius:14px;
 
   padding:15px;
 
   color:white;
 
-  font-weight:bold;
+  font-size:14px;
+  font-weight:850;
 
   cursor:pointer;
 
-  margin-top:15px;
+  transition:
+    transform .15s,
+    filter .15s;
+}
+
+button:hover{
+  filter:brightness(1.12);
+}
+
+button:active{
+  transform:scale(.98);
 }
 
 .upload{
   background:
     linear-gradient(
       135deg,
-      #00a878,
+      #00a978,
       #087cff
     );
 }
@@ -149,248 +256,385 @@ button{
     linear-gradient(
       135deg,
       #087cff,
-      #7a43ff
+      #7544ff
     );
 }
 
 .stop{
-  background:#1c2535;
+  background:#182235;
 }
 
-.preview{
-  margin-top:20px;
+/* =====================
+   PREVIEW
+===================== */
 
+.preview{
   display:none;
 
-  background:#080e1b;
+  margin-top:18px;
 
   padding:15px;
 
-  border-radius:15px;
+  border-radius:16px;
+
+  background:#060b15;
+
+  border:1px solid rgba(255,255,255,.07);
 }
 
 .preview img{
   width:100%;
   max-height:350px;
+
   object-fit:contain;
+
   border-radius:12px;
 }
 
 .filename{
-  margin-top:12px;
-  color:#b6c5da;
+  margin-top:11px;
+
+  color:#aebed4;
+
+  font-size:13px;
+
   word-break:break-word;
 }
 
 .textpreview{
+  display:none;
+
   margin-top:12px;
 
-  max-height:250px;
+  max-height:260px;
 
   overflow:auto;
 
-  white-space:pre-wrap;
-
-  background:#050912;
-
   padding:14px;
 
-  border-radius:10px;
+  border-radius:11px;
 
-  color:#c9d5e5;
+  background:#03070e;
+
+  color:#d0d9e7;
+
+  white-space:pre-wrap;
+
+  word-break:break-word;
 
   font-family:monospace;
 
-  font-size:13px;
+  font-size:12px;
+
+  line-height:1.55;
 }
+
+/* =====================
+   RESULT
+===================== */
 
 .result{
-  margin-top:15px;
-
-  padding:14px;
-
-  border-radius:12px;
-
-  background:#080e1b;
-
-  color:#9daec6;
-
-  word-break:break-word;
-}
-
-.result a{
-  color:#59cfff;
-}
-
-.status{
-  margin-top:18px;
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
+  margin-top:17px;
 
   padding:14px;
 
   border-radius:13px;
 
-  background:#080e1b;
+  background:#060b15;
+
+  border:1px solid rgba(255,255,255,.06);
+
+  color:#9eafc7;
+
+  font-size:13px;
+
+  line-height:1.5;
+
+  word-break:break-word;
+}
+
+.result a{
+  color:#62d4ff;
+}
+
+/* =====================
+   STATUS
+===================== */
+
+.status{
+  margin-top:17px;
+
+  padding:15px 16px;
+
+  border-radius:14px;
+
+  background:#060b15;
+
+  border:1px solid rgba(255,255,255,.06);
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+}
+
+.status-left{
+  display:flex;
+  align-items:center;
+  gap:9px;
 }
 
 .dot{
   width:10px;
   height:10px;
 
-  display:inline-block;
-
   border-radius:50%;
 
   background:#777;
-
-  margin-right:8px;
 }
 
 .dot.online{
   background:#20e58a;
 
   box-shadow:
-    0 0 15px #20e58a;
+    0 0 8px #20e58a,
+    0 0 18px rgba(32,229,138,.6);
 }
+
+#statusText{
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.6px;
+}
+
+#uptime{
+  color:#8999b0;
+  font-family:monospace;
+  font-size:12px;
+}
+
+/* =====================
+   FOOTER
+===================== */
 
 .footer{
   text-align:center;
 
-  color:#65728a;
+  margin-top:20px;
 
-  font-size:12px;
+  color:#64738b;
 
-  margin-top:18px;
+  font-size:11px;
+
+  letter-spacing:1px;
 }
 
-</style>
+/* =====================
+   MOBILE
+===================== */
 
+@media(max-width:520px){
+
+  .logo{
+    font-size:29px;
+    letter-spacing:3px;
+  }
+
+  .card{
+    padding:20px;
+  }
+
+  .buttons{
+    grid-template-columns:1fr;
+  }
+
+}
+</style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="wrapper">
 
-<div class="header">
+  <div class="header">
 
-<div class="logo">
-EXIT ARMAN
-</div>
+    <div class="logo">
+      EXIT ARMAN INSIDE
+    </div>
 
-<div class="subtitle">
-Messenger Automation Server
-</div>
+    <div class="subtitle">
+      MESSENGER AUTOMATION SERVER
+    </div>
 
-</div>
-
-
-<div class="card">
-
-<div class="title">
-Select File
-</div>
-
-<div class="filebox">
-
-<input
-  type="file"
-  id="file"
-  accept="*/*"
-  onchange="previewFile()"
->
-
-</div>
+  </div>
 
 
-<button
-  class="upload"
-  onclick="uploadFile()"
->
-📤 UPLOAD FILE
-</button>
+  <div class="card">
 
 
-<div
-  id="preview"
-  class="preview"
->
+    <!-- FACEBOOK PAGE URL -->
 
-<div
-  id="imagePreview"
->
-</div>
+    <div class="section">
 
-<div
-  id="textPreview"
-  class="textpreview"
->
-</div>
+      <div class="section-title">
+        Facebook Page URL
+      </div>
 
-<div
-  id="filename"
-  class="filename"
->
-</div>
+      <input
+        type="text"
+        id="pageUrl"
+        placeholder="https://facebook.com/your-page"
+      >
 
-</div>
+    </div>
 
 
-<div
-  id="result"
-  class="result"
->
-Select a file.
-</div>
+    <!-- MESSENGER URL -->
+
+    <div class="section">
+
+      <div class="section-title">
+        Messenger Chat URL
+      </div>
+
+      <input
+        type="text"
+        id="chatUrl"
+        placeholder="https://m.me/your-page"
+      >
+
+    </div>
 
 
-<button
-  class="start"
-  onclick="startServer()"
->
-🚀 START SERVER
-</button>
+    <!-- RECIPIENT ID -->
+
+    <div class="section">
+
+      <div class="section-title">
+        Authorized Recipient ID
+      </div>
+
+      <input
+        type="text"
+        id="recipientId"
+        placeholder="Messenger recipient ID"
+      >
+
+    </div>
 
 
-<button
-  class="stop"
-  onclick="stopServer()"
->
-⏹ STOP SERVER
-</button>
+    <!-- FILE -->
+
+    <div class="section">
+
+      <div class="section-title">
+        Select File
+      </div>
+
+      <div class="file-box">
+
+        <input
+          type="file"
+          id="file"
+          accept="*/*"
+          onchange="previewFile()"
+        >
+
+      </div>
+
+      <button
+        class="upload"
+        onclick="uploadFile()"
+      >
+        📤 UPLOAD FILE
+      </button>
+
+    </div>
 
 
-<div class="status">
+    <!-- PREVIEW -->
 
-<div>
+    <div
+      id="preview"
+      class="preview"
+    >
 
-<span
-  id="dot"
-  class="dot"
-></span>
+      <div id="imagePreview"></div>
 
-<span id="statusText">
-OFFLINE
-</span>
+      <div
+        id="textPreview"
+        class="textpreview"
+      ></div>
 
-</div>
+      <div
+        id="filename"
+        class="filename"
+      ></div>
 
-<div id="uptime">
-00:00:00
-</div>
-
-</div>
-
-</div>
+    </div>
 
 
-<div class="footer">
-Design by Exit Arman
-</div>
+    <!-- RESULT -->
+
+    <div
+      id="result"
+      class="result"
+    >
+      Select a file to begin.
+    </div>
+
+
+    <!-- START STOP -->
+
+    <div class="buttons">
+
+      <button
+        class="start"
+        onclick="startServer()"
+      >
+        🚀 START
+      </button>
+
+      <button
+        class="stop"
+        onclick="stopServer()"
+      >
+        ⏹ STOP
+      </button>
+
+    </div>
+
+
+    <!-- STATUS -->
+
+    <div class="status">
+
+      <div class="status-left">
+
+        <span
+          id="dot"
+          class="dot"
+        ></span>
+
+        <span id="statusText">
+          SERVER OFFLINE
+        </span>
+
+      </div>
+
+      <span id="uptime">
+        00:00:00
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer">
+    DESIGN BY EXIT ARMAN
+  </div>
 
 </div>
 
@@ -398,23 +642,21 @@ Design by Exit Arman
 <script>
 
 let selectedText = "";
+let statusTimer = null;
 
 
 // ==========================
-// PREVIEW
+// FILE PREVIEW
 // ==========================
 
 async function previewFile(){
 
   const file =
-    document.getElementById(
-      "file"
-    ).files[0];
+    document.getElementById("file")
+      .files[0];
 
   const preview =
-    document.getElementById(
-      "preview"
-    );
+    document.getElementById("preview");
 
   const imagePreview =
     document.getElementById(
@@ -431,6 +673,16 @@ async function previewFile(){
       "filename"
     );
 
+  selectedText = "";
+
+  imagePreview.innerHTML = "";
+
+  textPreview.textContent = "";
+
+  textPreview.style.display =
+    "none";
+
+
   if(!file){
 
     preview.style.display =
@@ -439,12 +691,9 @@ async function previewFile(){
     return;
   }
 
+
   preview.style.display =
     "block";
-
-  imagePreview.innerHTML = "";
-
-  textPreview.textContent = "";
 
   filename.textContent =
     "📄 " + file.name;
@@ -454,14 +703,14 @@ async function previewFile(){
 
   if(file.type.startsWith("image/")){
 
-    const url =
+    const imageUrl =
       URL.createObjectURL(file);
 
     imagePreview.innerHTML =
       `
       <img
-        src="${url}"
-        alt="Preview"
+        src="${imageUrl}"
+        alt="File Preview"
       >
       `;
 
@@ -486,11 +735,16 @@ async function previewFile(){
       textPreview.textContent =
         selectedText;
 
+      textPreview.style.display =
+        "block";
+
     }catch(error){
 
       textPreview.textContent =
         "Text read nahi ho saka.";
 
+      textPreview.style.display =
+        "block";
     }
 
   }
@@ -505,14 +759,11 @@ async function previewFile(){
 async function uploadFile(){
 
   const file =
-    document.getElementById(
-      "file"
-    ).files[0];
+    document.getElementById("file")
+      .files[0];
 
   const result =
-    document.getElementById(
-      "result"
-    );
+    document.getElementById("result");
 
   if(!file){
 
@@ -522,8 +773,9 @@ async function uploadFile(){
     return;
   }
 
+
   result.textContent =
-    "Uploading...";
+    "⏳ Uploading...";
 
 
   const formData =
@@ -559,7 +811,7 @@ async function uploadFile(){
 
       throw new Error(
         data.error ||
-        "Upload failed"
+        "Upload failed."
       );
 
     }
@@ -567,25 +819,23 @@ async function uploadFile(){
 
     result.innerHTML =
       `
-      ✅ Upload successful<br><br>
+      ✅ <b>Upload successful</b><br><br>
 
-      📄 ${data.filename}<br>
+      📄 ${data.filename}<br><br>
 
       🔗
       <a
         href="${data.url}"
         target="_blank"
       >
-        Open File
+        Open uploaded file
       </a>
       `;
-
 
   }catch(error){
 
     result.textContent =
-      "❌ " +
-      error.message;
+      "❌ " + error.message;
 
   }
 
@@ -603,29 +853,96 @@ async function startServer(){
       "result"
     );
 
+  const pageUrl =
+    document.getElementById(
+      "pageUrl"
+    ).value.trim();
+
+  const chatUrl =
+    document.getElementById(
+      "chatUrl"
+    ).value.trim();
+
+  const recipientId =
+    document.getElementById(
+      "recipientId"
+    ).value.trim();
+
+
+  if(!pageUrl){
+
+    result.textContent =
+      "❌ Facebook Page URL enter karo.";
+
+    return;
+  }
+
+  if(!chatUrl){
+
+    result.textContent =
+      "❌ Messenger Chat URL enter karo.";
+
+    return;
+  }
+
+  if(!recipientId){
+
+    result.textContent =
+      "❌ Authorized Recipient ID enter karo.";
+
+    return;
+  }
+
+
+  result.textContent =
+    "⏳ Starting server...";
+
+
   try{
 
     const response =
       await fetch(
         "/api/start",
         {
-          method:"POST"
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:JSON.stringify({
+            pageUrl,
+            chatUrl,
+            recipientId
+          })
         }
       );
+
 
     const data =
       await response.json();
 
+
+    if(!response.ok){
+
+      throw new Error(
+        data.error ||
+        "Start failed."
+      );
+
+    }
+
+
     result.textContent =
-      "✅ " +
-      data.message;
+      "✅ " + data.message;
 
     updateStatus();
 
   }catch(error){
 
     result.textContent =
-      "❌ Server error.";
+      "❌ " + error.message;
 
   }
 
@@ -638,14 +955,34 @@ async function startServer(){
 
 async function stopServer(){
 
-  await fetch(
-    "/api/stop",
-    {
-      method:"POST"
-    }
-  );
+  try{
 
-  updateStatus();
+    const response =
+      await fetch(
+        "/api/stop",
+        {
+          method:"POST"
+        }
+      );
+
+    const data =
+      await response.json();
+
+    document.getElementById(
+      "result"
+    ).textContent =
+      "⏹ " + data.message;
+
+    updateStatus();
+
+  }catch(error){
+
+    document.getElementById(
+      "result"
+    ).textContent =
+      "❌ Stop failed.";
+
+  }
 
 }
 
@@ -666,6 +1003,7 @@ async function updateStatus(){
     const data =
       await response.json();
 
+
     const dot =
       document.getElementById(
         "dot"
@@ -676,6 +1014,12 @@ async function updateStatus(){
         "statusText"
       );
 
+    const uptime =
+      document.getElementById(
+        "uptime"
+      );
+
+
     if(data.running){
 
       dot.classList.add(
@@ -685,6 +1029,27 @@ async function updateStatus(){
       status.textContent =
         "SERVER RUNNING";
 
+
+      clearInterval(
+        statusTimer
+      );
+
+
+      statusTimer =
+        setInterval(() => {
+
+          if(data.startedAt){
+
+            uptime.textContent =
+              formatTime(
+                Date.now() -
+                data.startedAt
+              );
+
+          }
+
+        },1000);
+
     }else{
 
       dot.classList.remove(
@@ -692,7 +1057,14 @@ async function updateStatus(){
       );
 
       status.textContent =
-        "OFFLINE";
+        "SERVER OFFLINE";
+
+      uptime.textContent =
+        "00:00:00";
+
+      clearInterval(
+        statusTimer
+      );
 
     }
 
@@ -701,16 +1073,49 @@ async function updateStatus(){
     document.getElementById(
       "statusText"
     ).textContent =
-      "ERROR";
+      "SERVER ERROR";
 
   }
 
 }
 
+
+// ==========================
+// TIME
+// ==========================
+
+function formatTime(ms){
+
+  let seconds =
+    Math.floor(ms / 1000);
+
+  let hours =
+    Math.floor(seconds / 3600);
+
+  let minutes =
+    Math.floor(
+      (seconds % 3600) / 60
+    );
+
+  seconds =
+    seconds % 60;
+
+
+  return (
+    String(hours).padStart(2,"0")
+    + ":" +
+    String(minutes).padStart(2,"0")
+    + ":" +
+    String(seconds).padStart(2,"0")
+  );
+
+}
+
+
+// Initial status
 updateStatus();
 
 </script>
 
 </body>
-
 </html>
