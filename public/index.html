@@ -1,40 +1,397 @@
-<div class="section">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXIT ARMAN - Secure Messenger Broadcast</title>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #131b2e;
+            --border-color: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-glow: rgba(99, 102, 241, 0.4);
+            --neon-blue: #38bdf8;
+            --neon-purple: #818cf8;
+            --danger: #ef4444;
+            --success: #22c55e;
+        }
 
-  <div class="label">
-    URL
-  </div>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
 
-  <input
-    type="text"
-    id="targetUrl"
-    placeholder="Paste URL here..."
-  >
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
 
-</div>
+        .container {
+            width: 100%;
+            max-width: 520px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(99, 102, 241, 0.1);
+        }
 
+        /* 3D Glowing Heading */
+        h1.brand-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 28px;
+            color: #ffffff;
+            text-transform: uppercase;
+            text-shadow: 
+                0 1px 0 #ccc,
+                0 2px 0 #c9c9c9,
+                0 3px 0 #bbb,
+                0 4px 0 #b2b2b2,
+                0 5px 0 rgba(0, 0, 0, 0.1),
+                0 0 5px rgba(0, 0, 0, 0.1),
+                0 1px 3px rgba(0, 0, 0, 0.3),
+                0 3px 5px rgba(0, 0, 0, 0.4),
+                0 5px 10px rgba(0, 0, 0, 0.5),
+                0 0 20px var(--neon-blue),
+                0 0 40px var(--neon-purple);
+        }
 
-<div class="section">
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-  <div class="label">
-    FILE
-  </div>
+        label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-  <div class="file">
+        input[type="text"], input[type="file"] {
+            width: 100%;
+            padding: 12px 16px;
+            background: #090d16;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
 
-    <input
-      type="file"
-      id="file"
-      accept="*/*"
-      onchange="previewFile()"
-    >
+        input[type="text"]:focus {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+        }
 
-  </div>
+        input[type="file"] {
+            padding: 10px;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
 
-  <button
-    class="upload"
-    onclick="uploadFile()"
-  >
-    📤 UPLOAD FILE
-  </button>
+        input[type="file"]::file-selector-button {
+            background: #1e293b;
+            border: none;
+            color: var(--text-main);
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background 0.2s;
+        }
 
-</div>
+        input[type="file"]::file-selector-button:hover {
+            background: #334155;
+        }
+
+        .btn-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        button.action-btn {
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+        }
+
+        #start-btn {
+            background: linear-gradient(135deg, #38bdf8, #6366f1);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+        }
+
+        #start-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        #stop-btn {
+            background: #1e293b;
+            color: var(--danger);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        #stop-btn:hover {
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .status-container {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .status-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .status-offline {
+            background: rgba(148, 163, 184, 0.1);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+        }
+
+        .status-running {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--success);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);
+        }
+
+        .status-stopped {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .preview-box {
+            margin-top: 16px;
+            background: #090d16;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            max-height: 120px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .preview-box.active {
+            display: block;
+        }
+
+        .progress-info {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .alert {
+            margin-top: 12px;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            display: none;
+        }
+        .alert.error {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            display: block;
+        }
+        .alert.success {
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="brand-title">EXIT ARMAN</h1>
+
+        <div class="form-group">
+            <label for="url-input">URL</label>
+            <input type="text" id="url-input" placeholder="Paste URL here...">
+        </div>
+
+        <div class="form-group">
+            <label for="file-input">File (.txt, .csv, .json)</label>
+            <input type="file" id="file-input" accept=".txt,.csv,.json">
+        </div>
+
+        <div class="form-group">
+            <button class="action-btn" id="upload-btn" style="width:100%; background:#1e293b; color:var(--text-main); font-size:0.85rem; padding:10px;">Upload File</button>
+        </div>
+
+        <div id="preview-container" class="preview-box"></div>
+        <div id="progress-container" class="progress-info"></div>
+        <div id="alert-box" class="alert"></div>
+
+        <div class="btn-row">
+            <button class="action-btn" id="start-btn">Start</button>
+            <button class="action-btn" id="stop-btn">Stop</button>
+        </div>
+
+        <div class="status-container">
+            <span class="status-label">Server Status</span>
+            <span id="status-badge" class="status-badge status-offline">OFFLINE</span>
+        </div>
+    </div>
+
+    <script>
+        const urlInput = document.getElementById('url-input');
+        const fileInput = document.getElementById('file-input');
+        const uploadBtn = document.getElementById('upload-btn');
+        const startBtn = document.getElementById('start-btn');
+        const stopBtn = document.getElementById('stop-btn');
+        const statusBadge = document.getElementById('status-badge');
+        const previewContainer = document.getElementById('preview-container');
+        const progressContainer = document.getElementById('progress-container');
+        const alertBox = document.getElementById('alert-box');
+
+        function showAlert(message, isError = true) {
+            alertBox.textContent = message;
+            alertBox.className = `alert ${isError ? 'error' : 'success'}`;
+            setTimeout(() => {
+                alertBox.className = 'alert';
+            }, 5000);
+        }
+
+        // Upload file handler
+        uploadBtn.addEventListener('click', async () => {
+            const file = fileInput.files[0];
+            const url = urlInput.value.trim();
+
+            if (!file) {
+                showAlert('Please select a file to upload.');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('url', url);
+
+            try {
+                uploadBtn.textContent = 'Uploading...';
+                const res = await fetch('/api/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await res.json();
+
+                if (!res.ok) throw new Error(data.error || 'Upload failed');
+
+                showAlert(`Successfully uploaded ${data.filename} (${data.totalLines} items).`, false);
+                
+                // Show preview
+                previewContainer.innerHTML = '<strong>Preview:</strong><br>' + data.preview.join('<br>');
+                previewContainer.classList.add('active');
+            } catch (err) {
+                showAlert(err.message);
+            } finally {
+                uploadBtn.textContent = 'Upload File';
+            }
+        });
+
+        // Start button handler
+        startBtn.addEventListener('click', async () => {
+            try {
+                const res = await fetch('/api/start', { method: 'POST' });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Failed to start');
+                showAlert('Processing initiated.', false);
+                fetchStatus();
+            } catch (err) {
+                showAlert(err.message);
+            }
+        });
+
+        // Stop button handler
+        stopBtn.addEventListener('click', async () => {
+            try {
+                const res = await fetch('/api/stop', { method: 'POST' });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Failed to stop');
+                showAlert('Processing stopped.', false);
+                fetchStatus();
+            } catch (err) {
+                showAlert(err.message);
+            }
+        });
+
+        // Fetch Server Status periodically
+        async function fetchStatus() {
+            try {
+                const res = await fetch('/api/status');
+                const data = await res.json();
+
+                statusBadge.textContent = data.status;
+                if (data.status === 'RUNNING') {
+                    statusBadge.className = 'status-badge status-running';
+                } else if (data.status === 'STOPPED') {
+                    statusBadge.className = 'status-badge status-stopped';
+                } else {
+                    statusBadge.className = 'status-badge status-offline';
+                }
+
+                if (data.progress && data.progress.total > 0) {
+                    progressContainer.textContent = `Progress: ${data.progress.currentIndex} / ${data.progress.total} sent (${data.progress.failed} failed)`;
+                } else {
+                    progressContainer.textContent = '';
+                }
+            } catch (err) {
+                console.error('Status fetch error:', err);
+            }
+        }
+
+        setInterval(fetchStatus, 2000);
+        fetchStatus();
+    </script>
+</body>
+</html>
