@@ -1,57 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1.0"
+>
 
 <title>EXIT ARMAN INSIDE</title>
 
 <style>
+
 *{
   box-sizing:border-box;
 }
 
-html,body{
-  margin:0;
-  min-height:100%;
-}
-
 body{
+  margin:0;
   min-height:100vh;
-  font-family:Inter,Arial,Helvetica,sans-serif;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
   color:#fff;
 
   background:
     radial-gradient(
-      circle at 10% 10%,
-      rgba(0,174,255,.18),
+      circle at 15% 10%,
+      rgba(0,170,255,.20),
       transparent 32%
     ),
     radial-gradient(
       circle at 90% 85%,
-      rgba(132,55,255,.20),
+      rgba(135,55,255,.20),
       transparent 35%
     ),
-    linear-gradient(
-      145deg,
-      #03060d,
-      #07101e 50%,
-      #04050c
-    );
+    #040711;
 
   display:flex;
   justify-content:center;
+
   padding:30px 16px;
 }
 
-.wrapper{
+.app{
   width:100%;
   max-width:650px;
 }
-
-/* =====================
-   HEADER
-===================== */
 
 .header{
   text-align:center;
@@ -59,106 +59,98 @@ body{
 }
 
 .logo{
-  position:relative;
-  display:inline-block;
-
   font-size:42px;
-  font-weight:950;
-  letter-spacing:5px;
+  font-weight:900;
+  letter-spacing:4px;
 
   color:#fff;
 
   text-shadow:
-    0 0 5px rgba(100,210,255,.9),
-    0 0 15px rgba(70,170,255,.8),
-    0 0 35px rgba(110,75,255,.7),
-    0 0 65px rgba(130,60,255,.5);
+    0 0 7px #58d9ff,
+    0 0 18px #3da8ff,
+    0 0 35px #755cff,
+    0 0 65px rgba(117,92,255,.7);
 
-  animation:glow 2.5s ease-in-out infinite alternate;
+  animation:
+    glow 2s ease-in-out infinite alternate;
 }
 
 @keyframes glow{
+
   from{
     text-shadow:
-      0 0 5px rgba(100,210,255,.7),
-      0 0 15px rgba(70,170,255,.6),
-      0 0 30px rgba(110,75,255,.5);
+      0 0 5px #58d9ff,
+      0 0 15px #3da8ff,
+      0 0 30px #755cff;
   }
 
   to{
     text-shadow:
-      0 0 8px rgba(120,225,255,1),
-      0 0 22px rgba(75,170,255,.9),
-      0 0 45px rgba(125,70,255,.8),
-      0 0 75px rgba(145,60,255,.5);
+      0 0 10px #8eeaff,
+      0 0 25px #58bfff,
+      0 0 50px #8a6cff,
+      0 0 80px rgba(138,108,255,.7);
   }
+
 }
 
 .subtitle{
-  margin-top:9px;
-  color:#9aa9bf;
-  font-size:13px;
+  margin-top:8px;
+
+  color:#92a2ba;
+
+  font-size:12px;
+
   letter-spacing:2px;
 }
 
-/* =====================
-   CARD
-===================== */
-
 .card{
-  padding:28px;
+  padding:27px;
 
-  border-radius:27px;
-
-  border:1px solid
-  rgba(255,255,255,.11);
+  border-radius:25px;
 
   background:
-    linear-gradient(
-      145deg,
-      rgba(17,25,43,.88),
-      rgba(5,9,18,.90)
-    );
+    rgba(8,14,27,.88);
 
-  backdrop-filter:blur(22px);
+  border:
+    1px solid
+    rgba(255,255,255,.10);
 
   box-shadow:
-    0 30px 100px rgba(0,0,0,.55),
-    inset 0 1px 0 rgba(255,255,255,.04);
-}
+    0 30px 90px
+    rgba(0,0,0,.55);
 
-/* =====================
-   SECTION
-===================== */
+  backdrop-filter:blur(20px);
+}
 
 .section{
-  margin-bottom:23px;
+  margin-bottom:20px;
 }
 
-.section-title{
-  margin-bottom:9px;
+.label{
+  margin-bottom:8px;
 
   color:#aebbd0;
 
   font-size:12px;
-  font-weight:800;
 
-  letter-spacing:1.4px;
+  font-weight:bold;
+
+  letter-spacing:1px;
+
   text-transform:uppercase;
 }
 
-/* =====================
-   INPUTS
-===================== */
-
-input[type="text"]{
+input[type=text]{
   width:100%;
 
-  padding:15px 16px;
+  padding:15px;
 
-  border-radius:14px;
+  border-radius:13px;
 
-  border:1px solid #273653;
+  border:
+    1px solid
+    #293854;
 
   outline:none;
 
@@ -167,50 +159,35 @@ input[type="text"]{
   color:#fff;
 
   font-size:14px;
-
-  transition:.2s;
 }
 
-input[type="text"]::placeholder{
-  color:#66758d;
+input[type=text]::placeholder{
+  color:#65748b;
 }
 
-input[type="text"]:focus{
-  border-color:#5d7cff;
+input[type=text]:focus{
+  border-color:#5a7cff;
 
   box-shadow:
-    0 0 0 3px rgba(93,124,255,.10),
-    0 0 20px rgba(75,110,255,.12);
+    0 0 0 3px
+    rgba(90,124,255,.10);
 }
 
-/* =====================
-   FILE
-===================== */
+.file{
+  padding:18px;
 
-.file-box{
-  padding:19px;
+  border-radius:14px;
 
-  border-radius:16px;
-
-  border:1px dashed #40516d;
+  border:
+    1px dashed
+    #40516c;
 
   background:#060b15;
 }
 
-input[type="file"]{
+input[type=file]{
   width:100%;
   color:#c8d4e5;
-}
-
-/* =====================
-   BUTTONS
-===================== */
-
-.buttons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:11px;
-  margin-top:8px;
 }
 
 button{
@@ -218,35 +195,26 @@ button{
 
   border:0;
 
-  border-radius:14px;
+  border-radius:13px;
 
   padding:15px;
 
-  color:white;
+  margin-top:10px;
+
+  color:#fff;
 
   font-size:14px;
-  font-weight:850;
+
+  font-weight:800;
 
   cursor:pointer;
-
-  transition:
-    transform .15s,
-    filter .15s;
-}
-
-button:hover{
-  filter:brightness(1.12);
-}
-
-button:active{
-  transform:scale(.98);
 }
 
 .upload{
   background:
     linear-gradient(
       135deg,
-      #00a978,
+      #00a878,
       #087cff
     );
 }
@@ -256,17 +224,13 @@ button:active{
     linear-gradient(
       135deg,
       #087cff,
-      #7544ff
+      #7646ff
     );
 }
 
 .stop{
   background:#182235;
 }
-
-/* =====================
-   PREVIEW
-===================== */
 
 .preview{
   display:none;
@@ -275,48 +239,51 @@ button:active{
 
   padding:15px;
 
-  border-radius:16px;
+  border-radius:15px;
 
   background:#060b15;
 
-  border:1px solid rgba(255,255,255,.07);
+  border:
+    1px solid
+    rgba(255,255,255,.07);
 }
 
 .preview img{
   width:100%;
+
   max-height:350px;
 
   object-fit:contain;
 
-  border-radius:12px;
+  border-radius:11px;
 }
 
 .filename{
-  margin-top:11px;
+  margin-top:10px;
 
-  color:#aebed4;
+  color:#b6c5d9;
 
   font-size:13px;
 
   word-break:break-word;
 }
 
-.textpreview{
+.text{
   display:none;
 
   margin-top:12px;
 
-  max-height:260px;
+  padding:14px;
+
+  max-height:280px;
 
   overflow:auto;
 
-  padding:14px;
-
-  border-radius:11px;
+  border-radius:10px;
 
   background:#03070e;
 
-  color:#d0d9e7;
+  color:#d2dbe8;
 
   white-space:pre-wrap;
 
@@ -329,11 +296,27 @@ button:active{
   line-height:1.55;
 }
 
-/* =====================
-   RESULT
-===================== */
-
 .result{
+  margin-top:16px;
+
+  padding:14px;
+
+  border-radius:12px;
+
+  background:#060b15;
+
+  color:#9eafc6;
+
+  font-size:13px;
+
+  line-height:1.5;
+}
+
+.result a{
+  color:#5fd3ff;
+}
+
+.status{
   margin-top:17px;
 
   padding:14px;
@@ -342,47 +325,17 @@ button:active{
 
   background:#060b15;
 
-  border:1px solid rgba(255,255,255,.06);
-
-  color:#9eafc7;
-
-  font-size:13px;
-
-  line-height:1.5;
-
-  word-break:break-word;
-}
-
-.result a{
-  color:#62d4ff;
-}
-
-/* =====================
-   STATUS
-===================== */
-
-.status{
-  margin-top:17px;
-
-  padding:15px 16px;
-
-  border-radius:14px;
-
-  background:#060b15;
-
-  border:1px solid rgba(255,255,255,.06);
-
   display:flex;
-
-  align-items:center;
 
   justify-content:space-between;
+
+  align-items:center;
 }
 
-.status-left{
+.statusLeft{
   display:flex;
   align-items:center;
-  gap:9px;
+  gap:8px;
 }
 
 .dot{
@@ -402,239 +355,230 @@ button:active{
     0 0 18px rgba(32,229,138,.6);
 }
 
-#statusText{
+.statusText{
   font-size:12px;
-  font-weight:800;
-  letter-spacing:.6px;
+  font-weight:bold;
 }
 
-#uptime{
+.uptime{
   color:#8999b0;
   font-family:monospace;
   font-size:12px;
 }
 
-/* =====================
-   FOOTER
-===================== */
-
 .footer{
+  margin-top:18px;
+
   text-align:center;
 
-  margin-top:20px;
-
-  color:#64738b;
+  color:#63728a;
 
   font-size:11px;
 
   letter-spacing:1px;
 }
 
-/* =====================
-   MOBILE
-===================== */
-
 @media(max-width:520px){
 
   .logo{
-    font-size:29px;
-    letter-spacing:3px;
+    font-size:28px;
+    letter-spacing:2px;
   }
 
   .card{
     padding:20px;
   }
 
-  .buttons{
-    grid-template-columns:1fr;
-  }
-
 }
+
 </style>
+
 </head>
 
 <body>
 
-<div class="wrapper">
+<div class="app">
 
-  <div class="header">
+<div class="header">
 
-    <div class="logo">
-      EXIT ARMAN INSIDE
-    </div>
+<div class="logo">
+EXIT ARMAN INSIDE
+</div>
 
-    <div class="subtitle">
-      MESSENGER AUTOMATION SERVER
-    </div>
+<div class="subtitle">
+MESSENGER TEST SERVER
+</div>
 
-  </div>
-
-
-  <div class="card">
+</div>
 
 
-    <!-- FACEBOOK PAGE URL -->
-
-    <div class="section">
-
-      <div class="section-title">
-        Facebook Page URL
-      </div>
-
-      <input
-        type="text"
-        id="pageUrl"
-        placeholder="https://facebook.com/your-page"
-      >
-
-    </div>
+<div class="card">
 
 
-    <!-- MESSENGER URL -->
+<!-- FACEBOOK PAGE -->
 
-    <div class="section">
+<div class="section">
 
-      <div class="section-title">
-        Messenger Chat URL
-      </div>
+<div class="label">
+Facebook Page URL
+</div>
 
-      <input
-        type="text"
-        id="chatUrl"
-        placeholder="https://m.me/your-page"
-      >
+<input
+  type="text"
+  id="pageUrl"
+  placeholder="https://facebook.com/your-page"
+>
 
-    </div>
-
-
-    <!-- RECIPIENT ID -->
-
-    <div class="section">
-
-      <div class="section-title">
-        Authorized Recipient ID
-      </div>
-
-      <input
-        type="text"
-        id="recipientId"
-        placeholder="Messenger recipient ID"
-      >
-
-    </div>
+</div>
 
 
-    <!-- FILE -->
+<!-- CHAT URL -->
 
-    <div class="section">
+<div class="section">
 
-      <div class="section-title">
-        Select File
-      </div>
+<div class="label">
+Messenger Chat URL
+</div>
 
-      <div class="file-box">
+<input
+  type="text"
+  id="chatUrl"
+  placeholder="https://m.me/your-page"
+>
 
-        <input
-          type="file"
-          id="file"
-          accept="*/*"
-          onchange="previewFile()"
-        >
-
-      </div>
-
-      <button
-        class="upload"
-        onclick="uploadFile()"
-      >
-        📤 UPLOAD FILE
-      </button>
-
-    </div>
+</div>
 
 
-    <!-- PREVIEW -->
+<!-- RECIPIENT -->
 
-    <div
-      id="preview"
-      class="preview"
-    >
+<div class="section">
 
-      <div id="imagePreview"></div>
+<div class="label">
+Authorized Recipient ID
+</div>
 
-      <div
-        id="textPreview"
-        class="textpreview"
-      ></div>
+<input
+  type="text"
+  id="recipientId"
+  placeholder="Recipient ID"
+>
 
-      <div
-        id="filename"
-        class="filename"
-      ></div>
-
-    </div>
+</div>
 
 
-    <!-- RESULT -->
+<!-- FILE -->
 
-    <div
-      id="result"
-      class="result"
-    >
-      Select a file to begin.
-    </div>
+<div class="section">
 
+<div class="label">
+Choose File
+</div>
 
-    <!-- START STOP -->
+<div class="file">
 
-    <div class="buttons">
+<input
+  type="file"
+  id="file"
+  accept="*/*"
+  onchange="previewFile()"
+>
 
-      <button
-        class="start"
-        onclick="startServer()"
-      >
-        🚀 START
-      </button>
+</div>
 
-      <button
-        class="stop"
-        onclick="stopServer()"
-      >
-        ⏹ STOP
-      </button>
+<button
+  class="upload"
+  onclick="uploadFile()"
+>
+📤 UPLOAD FILE
+</button>
 
-    </div>
+</div>
 
 
-    <!-- STATUS -->
+<!-- PREVIEW -->
 
-    <div class="status">
+<div
+  class="preview"
+  id="preview"
+>
 
-      <div class="status-left">
+<div id="imagePreview"></div>
 
-        <span
-          id="dot"
-          class="dot"
-        ></span>
+<div
+  class="text"
+  id="textPreview"
+></div>
 
-        <span id="statusText">
-          SERVER OFFLINE
-        </span>
+<div
+  class="filename"
+  id="filename"
+></div>
 
-      </div>
-
-      <span id="uptime">
-        00:00:00
-      </span>
-
-    </div>
-
-  </div>
+</div>
 
 
-  <div class="footer">
-    DESIGN BY EXIT ARMAN
-  </div>
+<!-- RESULT -->
+
+<div
+  class="result"
+  id="result"
+>
+Ready.
+</div>
+
+
+<!-- CONTROLS -->
+
+<button
+  class="start"
+  onclick="startServer()"
+>
+🚀 START TEST SERVER
+</button>
+
+<button
+  class="stop"
+  onclick="stopServer()"
+>
+⏹ STOP SERVER
+</button>
+
+
+<!-- STATUS -->
+
+<div class="status">
+
+<div class="statusLeft">
+
+<span
+  class="dot"
+  id="dot"
+></span>
+
+<span
+  class="statusText"
+  id="statusText"
+>
+SERVER OFFLINE
+</span>
+
+</div>
+
+<span
+  class="uptime"
+  id="uptime"
+>
+00:00:00
+</span>
+
+</div>
+
+</div>
+
+
+<div class="footer">
+DESIGN BY EXIT ARMAN
+</div>
 
 </div>
 
@@ -642,28 +586,32 @@ button:active{
 <script>
 
 let selectedText = "";
-let statusTimer = null;
+let statusInterval = null;
 
 
-// ==========================
+// =========================
 // FILE PREVIEW
-// ==========================
+// =========================
 
 async function previewFile(){
 
+  const input =
+    document.getElementById("file");
+
   const file =
-    document.getElementById("file")
-      .files[0];
+    input.files[0];
 
   const preview =
-    document.getElementById("preview");
+    document.getElementById(
+      "preview"
+    );
 
-  const imagePreview =
+  const image =
     document.getElementById(
       "imagePreview"
     );
 
-  const textPreview =
+  const text =
     document.getElementById(
       "textPreview"
     );
@@ -675,11 +623,11 @@ async function previewFile(){
 
   selectedText = "";
 
-  imagePreview.innerHTML = "";
+  image.innerHTML = "";
 
-  textPreview.textContent = "";
+  text.textContent = "";
 
-  textPreview.style.display =
+  text.style.display =
     "none";
 
 
@@ -701,16 +649,18 @@ async function previewFile(){
 
   // IMAGE
 
-  if(file.type.startsWith("image/")){
+  if(
+    file.type.startsWith("image/")
+  ){
 
-    const imageUrl =
+    const url =
       URL.createObjectURL(file);
 
-    imagePreview.innerHTML =
+    image.innerHTML =
       `
       <img
-        src="${imageUrl}"
-        alt="File Preview"
+        src="${url}"
+        alt="Preview"
       >
       `;
 
@@ -732,19 +682,20 @@ async function previewFile(){
       selectedText =
         await file.text();
 
-      textPreview.textContent =
+      text.textContent =
         selectedText;
 
-      textPreview.style.display =
+      text.style.display =
         "block";
 
-    }catch(error){
+    }catch(e){
 
-      textPreview.textContent =
+      text.textContent =
         "Text read nahi ho saka.";
 
-      textPreview.style.display =
+      text.style.display =
         "block";
+
     }
 
   }
@@ -752,18 +703,21 @@ async function previewFile(){
 }
 
 
-// ==========================
+// =========================
 // UPLOAD
-// ==========================
+// =========================
 
 async function uploadFile(){
 
   const file =
-    document.getElementById("file")
-      .files[0];
+    document.getElementById(
+      "file"
+    ).files[0];
 
   const result =
-    document.getElementById("result");
+    document.getElementById(
+      "result"
+    );
 
   if(!file){
 
@@ -778,15 +732,15 @@ async function uploadFile(){
     "⏳ Uploading...";
 
 
-  const formData =
+  const form =
     new FormData();
 
-  formData.append(
+  form.append(
     "file",
     file
   );
 
-  formData.append(
+  form.append(
     "message",
     selectedText
   );
@@ -799,7 +753,7 @@ async function uploadFile(){
         "/api/upload",
         {
           method:"POST",
-          body:formData
+          body:form
         }
       );
 
@@ -819,9 +773,9 @@ async function uploadFile(){
 
     result.innerHTML =
       `
-      ✅ <b>Upload successful</b><br><br>
+      ✅ <b>File uploaded</b><br><br>
 
-      📄 ${data.filename}<br><br>
+      📄 ${data.filename}<br>
 
       🔗
       <a
@@ -835,16 +789,17 @@ async function uploadFile(){
   }catch(error){
 
     result.textContent =
-      "❌ " + error.message;
+      "❌ " +
+      error.message;
 
   }
 
 }
 
 
-// ==========================
+// =========================
 // START
-// ==========================
+// =========================
 
 async function startServer(){
 
@@ -869,33 +824,17 @@ async function startServer(){
     ).value.trim();
 
 
-  if(!pageUrl){
+  if(
+    !pageUrl ||
+    !chatUrl ||
+    !recipientId
+  ){
 
     result.textContent =
-      "❌ Facebook Page URL enter karo.";
+      "❌ Page URL, Chat URL aur Authorized Recipient ID fill karo.";
 
     return;
   }
-
-  if(!chatUrl){
-
-    result.textContent =
-      "❌ Messenger Chat URL enter karo.";
-
-    return;
-  }
-
-  if(!recipientId){
-
-    result.textContent =
-      "❌ Authorized Recipient ID enter karo.";
-
-    return;
-  }
-
-
-  result.textContent =
-    "⏳ Starting server...";
 
 
   try{
@@ -924,16 +863,6 @@ async function startServer(){
       await response.json();
 
 
-    if(!response.ok){
-
-      throw new Error(
-        data.error ||
-        "Start failed."
-      );
-
-    }
-
-
     result.textContent =
       "✅ " + data.message;
 
@@ -942,16 +871,16 @@ async function startServer(){
   }catch(error){
 
     result.textContent =
-      "❌ " + error.message;
+      "❌ Server connection failed.";
 
   }
 
 }
 
 
-// ==========================
+// =========================
 // STOP
-// ==========================
+// =========================
 
 async function stopServer(){
 
@@ -968,10 +897,12 @@ async function stopServer(){
     const data =
       await response.json();
 
+
     document.getElementById(
       "result"
     ).textContent =
       "⏹ " + data.message;
+
 
     updateStatus();
 
@@ -987,9 +918,9 @@ async function stopServer(){
 }
 
 
-// ==========================
+// =========================
 // STATUS
-// ==========================
+// =========================
 
 async function updateStatus(){
 
@@ -1014,12 +945,6 @@ async function updateStatus(){
         "statusText"
       );
 
-    const uptime =
-      document.getElementById(
-        "uptime"
-      );
-
-
     if(data.running){
 
       dot.classList.add(
@@ -1029,27 +954,6 @@ async function updateStatus(){
       status.textContent =
         "SERVER RUNNING";
 
-
-      clearInterval(
-        statusTimer
-      );
-
-
-      statusTimer =
-        setInterval(() => {
-
-          if(data.startedAt){
-
-            uptime.textContent =
-              formatTime(
-                Date.now() -
-                data.startedAt
-              );
-
-          }
-
-        },1000);
-
     }else{
 
       dot.classList.remove(
@@ -1058,13 +962,6 @@ async function updateStatus(){
 
       status.textContent =
         "SERVER OFFLINE";
-
-      uptime.textContent =
-        "00:00:00";
-
-      clearInterval(
-        statusTimer
-      );
 
     }
 
@@ -1080,42 +977,12 @@ async function updateStatus(){
 }
 
 
-// ==========================
-// TIME
-// ==========================
+// INITIAL STATUS
 
-function formatTime(ms){
-
-  let seconds =
-    Math.floor(ms / 1000);
-
-  let hours =
-    Math.floor(seconds / 3600);
-
-  let minutes =
-    Math.floor(
-      (seconds % 3600) / 60
-    );
-
-  seconds =
-    seconds % 60;
-
-
-  return (
-    String(hours).padStart(2,"0")
-    + ":" +
-    String(minutes).padStart(2,"0")
-    + ":" +
-    String(seconds).padStart(2,"0")
-  );
-
-}
-
-
-// Initial status
 updateStatus();
 
 </script>
 
 </body>
+
 </html>
