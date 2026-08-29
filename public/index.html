@@ -7,10 +7,10 @@
 
 <meta
   name="viewport"
-  content="width=device-width,initial-scale=1.0"
+  content="width=device-width, initial-scale=1.0"
 >
 
-<title>EXIT ARMAN INSIDE</title>
+<title>EXIT ARMAN</title>
 
 <style>
 
@@ -22,122 +22,100 @@ body{
   margin:0;
   min-height:100vh;
 
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
-  color:#fff;
+  padding:20px;
+
+  font-family:Arial,sans-serif;
+
+  color:white;
 
   background:
     radial-gradient(
-      circle at 15% 10%,
-      rgba(0,170,255,.20),
-      transparent 32%
-    ),
-    radial-gradient(
-      circle at 90% 85%,
-      rgba(135,55,255,.20),
+      circle at 20% 10%,
+      rgba(0,170,255,.18),
       transparent 35%
     ),
-    #040711;
-
-  display:flex;
-  justify-content:center;
-
-  padding:30px 16px;
+    radial-gradient(
+      circle at 85% 90%,
+      rgba(130,60,255,.20),
+      transparent 35%
+    ),
+    #050812;
 }
 
 .app{
   width:100%;
-  max-width:650px;
-}
-
-.header{
-  text-align:center;
-  margin-bottom:25px;
+  max-width:570px;
 }
 
 .logo{
-  font-size:42px;
+  text-align:center;
+
+  margin-bottom:25px;
+
+  font-size:55px;
   font-weight:900;
-  letter-spacing:4px;
+
+  letter-spacing:5px;
 
   color:#fff;
 
-  text-shadow:
-    0 0 7px #58d9ff,
-    0 0 18px #3da8ff,
-    0 0 35px #755cff,
-    0 0 65px rgba(117,92,255,.7);
+  transform:
+    perspective(500px)
+    rotateX(8deg);
 
-  animation:
-    glow 2s ease-in-out infinite alternate;
+  text-shadow:
+    1px 1px 0 #64748b,
+    2px 2px 0 #475569,
+    4px 4px 0 #334155,
+    0 0 12px #55d8ff,
+    0 0 30px #596cff,
+    0 0 55px #8a55ff;
+
+  animation:glow 2.5s infinite alternate;
 }
 
 @keyframes glow{
 
   from{
-    text-shadow:
-      0 0 5px #58d9ff,
-      0 0 15px #3da8ff,
-      0 0 30px #755cff;
+    filter:brightness(.9);
   }
 
   to{
-    text-shadow:
-      0 0 10px #8eeaff,
-      0 0 25px #58bfff,
-      0 0 50px #8a6cff,
-      0 0 80px rgba(138,108,255,.7);
+    filter:brightness(1.25);
   }
 
 }
 
-.subtitle{
-  margin-top:8px;
-
-  color:#92a2ba;
-
-  font-size:12px;
-
-  letter-spacing:2px;
-}
-
 .card{
-  padding:27px;
+  padding:25px;
 
-  border-radius:25px;
+  border-radius:24px;
 
   background:
     rgba(8,14,27,.88);
 
   border:
     1px solid
-    rgba(255,255,255,.10);
+    rgba(255,255,255,.1);
 
   box-shadow:
-    0 30px 90px
+    0 30px 80px
     rgba(0,0,0,.55);
-
-  backdrop-filter:blur(20px);
-}
-
-.section{
-  margin-bottom:20px;
 }
 
 .label{
-  margin-bottom:8px;
+  margin-bottom:9px;
 
   color:#aebbd0;
 
   font-size:12px;
-
   font-weight:bold;
 
   letter-spacing:1px;
-
   text-transform:uppercase;
 }
 
@@ -148,29 +126,23 @@ input[type=text]{
 
   border-radius:13px;
 
-  border:
-    1px solid
-    #293854;
+  border:1px solid #293854;
 
   outline:none;
 
   background:#060b15;
 
-  color:#fff;
+  color:white;
 
   font-size:14px;
 }
 
-input[type=text]::placeholder{
-  color:#65748b;
-}
-
 input[type=text]:focus{
-  border-color:#5a7cff;
+  border-color:#657cff;
 
   box-shadow:
-    0 0 0 3px
-    rgba(90,124,255,.10);
+    0 0 18px
+    rgba(85,110,255,.18);
 }
 
 .file{
@@ -178,9 +150,7 @@ input[type=text]:focus{
 
   border-radius:14px;
 
-  border:
-    1px dashed
-    #40516c;
+  border:1px dashed #40516c;
 
   background:#060b15;
 }
@@ -193,18 +163,17 @@ input[type=file]{
 button{
   width:100%;
 
+  padding:15px;
+
+  margin-top:12px;
+
   border:0;
 
   border-radius:13px;
 
-  padding:15px;
-
-  margin-top:10px;
-
-  color:#fff;
+  color:white;
 
   font-size:14px;
-
   font-weight:800;
 
   cursor:pointer;
@@ -224,34 +193,29 @@ button{
     linear-gradient(
       135deg,
       #087cff,
-      #7646ff
+      #7546ff
     );
 }
 
 .stop{
-  background:#182235;
+  background:#1a2537;
 }
 
 .preview{
   display:none;
 
-  margin-top:18px;
+  margin-top:17px;
 
   padding:15px;
 
   border-radius:15px;
 
   background:#060b15;
-
-  border:
-    1px solid
-    rgba(255,255,255,.07);
 }
 
 .preview img{
   width:100%;
-
-  max-height:350px;
+  max-height:330px;
 
   object-fit:contain;
 
@@ -261,39 +225,33 @@ button{
 .filename{
   margin-top:10px;
 
-  color:#b6c5d9;
+  color:#aebed4;
 
   font-size:13px;
-
-  word-break:break-word;
 }
 
 .text{
-  display:none;
+  margin-top:10px;
 
-  margin-top:12px;
-
-  padding:14px;
-
-  max-height:280px;
+  max-height:250px;
 
   overflow:auto;
+
+  padding:13px;
 
   border-radius:10px;
 
   background:#03070e;
 
-  color:#d2dbe8;
+  color:#d3dce8;
 
   white-space:pre-wrap;
-
-  word-break:break-word;
 
   font-family:monospace;
 
   font-size:12px;
 
-  line-height:1.55;
+  line-height:1.5;
 }
 
 .result{
@@ -305,19 +263,19 @@ button{
 
   background:#060b15;
 
-  color:#9eafc6;
+  color:#a1b1c8;
 
   font-size:13px;
 
-  line-height:1.5;
+  word-break:break-word;
 }
 
 .result a{
-  color:#5fd3ff;
+  color:#5fd4ff;
 }
 
 .status{
-  margin-top:17px;
+  margin-top:16px;
 
   padding:14px;
 
@@ -328,19 +286,15 @@ button{
   display:flex;
 
   justify-content:space-between;
-
-  align-items:center;
-}
-
-.statusLeft{
-  display:flex;
-  align-items:center;
-  gap:8px;
 }
 
 .dot{
-  width:10px;
-  height:10px;
+  display:inline-block;
+
+  width:9px;
+  height:9px;
+
+  margin-right:7px;
 
   border-radius:50%;
 
@@ -351,44 +305,17 @@ button{
   background:#20e58a;
 
   box-shadow:
-    0 0 8px #20e58a,
-    0 0 18px rgba(32,229,138,.6);
-}
-
-.statusText{
-  font-size:12px;
-  font-weight:bold;
-}
-
-.uptime{
-  color:#8999b0;
-  font-family:monospace;
-  font-size:12px;
+    0 0 15px #20e58a;
 }
 
 .footer{
-  margin-top:18px;
+  margin-top:17px;
 
   text-align:center;
 
-  color:#63728a;
+  color:#63718a;
 
   font-size:11px;
-
-  letter-spacing:1px;
-}
-
-@media(max-width:520px){
-
-  .logo{
-    font-size:28px;
-    letter-spacing:2px;
-  }
-
-  .card{
-    padding:20px;
-  }
-
 }
 
 </style>
@@ -399,79 +326,26 @@ button{
 
 <div class="app">
 
-<div class="header">
-
 <div class="logo">
-EXIT ARMAN INSIDE
-</div>
-
-<div class="subtitle">
-MESSENGER TEST SERVER
-</div>
-
+EXIT ARMAN
 </div>
 
 
 <div class="card">
 
-
-<!-- FACEBOOK PAGE -->
-
-<div class="section">
-
 <div class="label">
-Facebook Page URL
+URL
 </div>
 
 <input
   type="text"
-  id="pageUrl"
-  placeholder="https://facebook.com/your-page"
+  id="targetUrl"
+  placeholder="Paste Page / Chat / Group URL"
 >
 
-</div>
 
-
-<!-- CHAT URL -->
-
-<div class="section">
-
-<div class="label">
-Messenger Chat URL
-</div>
-
-<input
-  type="text"
-  id="chatUrl"
-  placeholder="https://m.me/your-page"
->
-
-</div>
-
-
-<!-- RECIPIENT -->
-
-<div class="section">
-
-<div class="label">
-Authorized Recipient ID
-</div>
-
-<input
-  type="text"
-  id="recipientId"
-  placeholder="Recipient ID"
->
-
-</div>
-
-
-<!-- FILE -->
-
-<div class="section">
-
-<div class="label">
-Choose File
+<div class="label" style="margin-top:20px;">
+File
 </div>
 
 <div class="file">
@@ -485,6 +359,7 @@ Choose File
 
 </div>
 
+
 <button
   class="upload"
   onclick="uploadFile()"
@@ -492,10 +367,6 @@ Choose File
 📤 UPLOAD FILE
 </button>
 
-</div>
-
-
-<!-- PREVIEW -->
 
 <div
   class="preview"
@@ -517,8 +388,6 @@ Choose File
 </div>
 
 
-<!-- RESULT -->
-
 <div
   class="result"
   id="result"
@@ -527,47 +396,38 @@ Ready.
 </div>
 
 
-<!-- CONTROLS -->
-
 <button
   class="start"
   onclick="startServer()"
 >
-🚀 START TEST SERVER
+🚀 START
 </button>
+
 
 <button
   class="stop"
   onclick="stopServer()"
 >
-⏹ STOP SERVER
+⏹ STOP
 </button>
 
 
-<!-- STATUS -->
-
 <div class="status">
 
-<div class="statusLeft">
+<div>
 
 <span
   class="dot"
   id="dot"
 ></span>
 
-<span
-  class="statusText"
-  id="statusText"
->
-SERVER OFFLINE
+<span id="statusText">
+OFFLINE
 </span>
 
 </div>
 
-<span
-  class="uptime"
-  id="uptime"
->
+<span id="uptime">
 00:00:00
 </span>
 
@@ -586,20 +446,15 @@ DESIGN BY EXIT ARMAN
 <script>
 
 let selectedText = "";
-let statusInterval = null;
+let timer = null;
 
-
-// =========================
-// FILE PREVIEW
-// =========================
 
 async function previewFile(){
 
-  const input =
-    document.getElementById("file");
-
   const file =
-    input.files[0];
+    document.getElementById(
+      "file"
+    ).files[0];
 
   const preview =
     document.getElementById(
@@ -621,16 +476,6 @@ async function previewFile(){
       "filename"
     );
 
-  selectedText = "";
-
-  image.innerHTML = "";
-
-  text.textContent = "";
-
-  text.style.display =
-    "none";
-
-
   if(!file){
 
     preview.style.display =
@@ -639,36 +484,29 @@ async function previewFile(){
     return;
   }
 
-
   preview.style.display =
     "block";
+
+  image.innerHTML = "";
+  text.textContent = "";
 
   filename.textContent =
     "📄 " + file.name;
 
+  selectedText = "";
 
-  // IMAGE
 
-  if(
-    file.type.startsWith("image/")
-  ){
+  if(file.type.startsWith("image/")){
 
     const url =
       URL.createObjectURL(file);
 
     image.innerHTML =
-      `
-      <img
-        src="${url}"
-        alt="Preview"
-      >
-      `;
+      `<img src="${url}">`;
 
     return;
   }
 
-
-  // TEXT
 
   if(
     file.type.startsWith("text/") ||
@@ -677,35 +515,16 @@ async function previewFile(){
     file.name.endsWith(".json")
   ){
 
-    try{
+    selectedText =
+      await file.text();
 
-      selectedText =
-        await file.text();
-
-      text.textContent =
-        selectedText;
-
-      text.style.display =
-        "block";
-
-    }catch(e){
-
-      text.textContent =
-        "Text read nahi ho saka.";
-
-      text.style.display =
-        "block";
-
-    }
+    text.textContent =
+      selectedText;
 
   }
 
 }
 
-
-// =========================
-// UPLOAD
-// =========================
 
 async function uploadFile(){
 
@@ -722,7 +541,7 @@ async function uploadFile(){
   if(!file){
 
     result.textContent =
-      "❌ Pehle file select karo.";
+      "❌ File select karo.";
 
     return;
   }
@@ -739,12 +558,6 @@ async function uploadFile(){
     "file",
     file
   );
-
-  form.append(
-    "message",
-    selectedText
-  );
-
 
   try{
 
@@ -773,16 +586,13 @@ async function uploadFile(){
 
     result.innerHTML =
       `
-      ✅ <b>File uploaded</b><br><br>
-
-      📄 ${data.filename}<br>
-
-      🔗
+      ✅ File uploaded<br><br>
+      ${data.filename}<br><br>
       <a
         href="${data.url}"
         target="_blank"
       >
-        Open uploaded file
+        Open File
       </a>
       `;
 
@@ -797,41 +607,22 @@ async function uploadFile(){
 }
 
 
-// =========================
-// START
-// =========================
-
 async function startServer(){
+
+  const url =
+    document.getElementById(
+      "targetUrl"
+    ).value.trim();
 
   const result =
     document.getElementById(
       "result"
     );
 
-  const pageUrl =
-    document.getElementById(
-      "pageUrl"
-    ).value.trim();
-
-  const chatUrl =
-    document.getElementById(
-      "chatUrl"
-    ).value.trim();
-
-  const recipientId =
-    document.getElementById(
-      "recipientId"
-    ).value.trim();
-
-
-  if(
-    !pageUrl ||
-    !chatUrl ||
-    !recipientId
-  ){
+  if(!url){
 
     result.textContent =
-      "❌ Page URL, Chat URL aur Authorized Recipient ID fill karo.";
+      "❌ URL enter karo.";
 
     return;
   }
@@ -851,9 +642,7 @@ async function startServer(){
           },
 
           body:JSON.stringify({
-            pageUrl,
-            chatUrl,
-            recipientId
+            url:url
           })
         }
       );
@@ -863,64 +652,44 @@ async function startServer(){
       await response.json();
 
 
+    if(!response.ok){
+
+      throw new Error(
+        data.error
+      );
+
+    }
+
+
     result.textContent =
-      "✅ " + data.message;
+      "✅ Server started.";
 
     updateStatus();
 
   }catch(error){
 
     result.textContent =
-      "❌ Server connection failed.";
+      "❌ " +
+      error.message;
 
   }
 
 }
 
-
-// =========================
-// STOP
-// =========================
 
 async function stopServer(){
 
-  try{
+  await fetch(
+    "/api/stop",
+    {
+      method:"POST"
+    }
+  );
 
-    const response =
-      await fetch(
-        "/api/stop",
-        {
-          method:"POST"
-        }
-      );
-
-    const data =
-      await response.json();
-
-
-    document.getElementById(
-      "result"
-    ).textContent =
-      "⏹ " + data.message;
-
-
-    updateStatus();
-
-  }catch(error){
-
-    document.getElementById(
-      "result"
-    ).textContent =
-      "❌ Stop failed.";
-
-  }
+  updateStatus();
 
 }
 
-
-// =========================
-// STATUS
-// =========================
 
 async function updateStatus(){
 
@@ -945,6 +714,12 @@ async function updateStatus(){
         "statusText"
       );
 
+    const uptime =
+      document.getElementById(
+        "uptime"
+      );
+
+
     if(data.running){
 
       dot.classList.add(
@@ -952,7 +727,24 @@ async function updateStatus(){
       );
 
       status.textContent =
-        "SERVER RUNNING";
+        "RUNNING";
+
+      clearInterval(timer);
+
+      timer =
+        setInterval(() => {
+
+          if(data.startedAt){
+
+            uptime.textContent =
+              formatTime(
+                Date.now() -
+                data.startedAt
+              );
+
+          }
+
+        },1000);
 
     }else{
 
@@ -961,7 +753,12 @@ async function updateStatus(){
       );
 
       status.textContent =
-        "SERVER OFFLINE";
+        "OFFLINE";
+
+      uptime.textContent =
+        "00:00:00";
+
+      clearInterval(timer);
 
     }
 
@@ -970,19 +767,44 @@ async function updateStatus(){
     document.getElementById(
       "statusText"
     ).textContent =
-      "SERVER ERROR";
+      "ERROR";
 
   }
 
 }
 
 
-// INITIAL STATUS
+function formatTime(ms){
+
+  let seconds =
+    Math.floor(ms / 1000);
+
+  let hours =
+    Math.floor(seconds / 3600);
+
+  let minutes =
+    Math.floor(
+      (seconds % 3600) / 60
+    );
+
+  seconds =
+    seconds % 60;
+
+
+  return (
+    String(hours).padStart(2,"0")
+    + ":" +
+    String(minutes).padStart(2,"0")
+    + ":" +
+    String(seconds).padStart(2,"0")
+  );
+
+}
+
 
 updateStatus();
 
 </script>
 
 </body>
-
 </html>
