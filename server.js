@@ -20,13 +20,13 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname);
 
-    const name =
+    const filename =
       Date.now() +
       "-" +
-      Math.random().toString(36).substring(2, 9) +
+      Math.random().toString(36).slice(2, 10) +
       ext;
 
-    cb(null, name);
+    cb(null, filename);
   }
 });
 
@@ -40,7 +40,9 @@ const upload = multer({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(
+  express.static(path.join(__dirname, "public"))
+);
 
 app.use(
   "/uploads",
@@ -49,29 +51,26 @@ app.use(
 
 let running = false;
 let startedAt = null;
-
 let lastUpload = null;
 
 
-// ================================
 // HOME
-// ================================
-
 app.get("/", (req, res) => {
   res.sendFile(
-    path.join(__dirname, "public", "index.html")
+    path.join(
+      __dirname,
+      "public",
+      "index.html"
+    )
   );
 });
 
 
-// ================================
 // UPLOAD
-// ================================
-
 app.post(
   "/api/upload",
   upload.single("file"),
-  async (req, res) => {
+  (req, res) => {
 
     try {
 
@@ -90,60 +89,51 @@ app.post(
           req.file.filename
         )}`;
 
-      const mime =
-        req.file.mimetype || "";
-
       let text = null;
 
-      // ----------------------------
-      // TEXT FILE
-      // ----------------------------
+      const name =
+        req.file.originalname.toLowerCase();
 
-      if (
-        mime.startsWith("text/") ||
-        req.file.originalname.endsWith(".txt") ||
-        req.file.originalname.endsWith(".csv") ||
-        req.file.originalname.endsWith(".json")
-      ) {
+      const isText =
+        req.file.mimetype.startsWith("text/") ||
+        name.endsWith(".txt") ||
+        name.endsWith(".csv") ||
+        name.endsWith(".json");
 
+      if (isText) {
         text = fs.readFileSync(
           req.file.path,
           "utf8"
         );
-
       }
 
-      // ----------------------------
-      // IMAGE
-      // ----------------------------
-
       const isImage =
-        mime.startsWith("image/");
+        req.file.mimetype.startsWith("image/");
 
       lastUpload = {
-        filename: req.file.originalname,
-        storedFilename: req.file.filename,
-        mimetype: mime,
+        originalName: req.file.originalname,
+        filename: req.file.filename,
+        mimetype: req.file.mimetype,
         size: req.file.size,
         url: fileUrl,
         text: text,
         isImage: isImage,
-        uploadedAt: new Date().toISOString()
+        uploadedAt: Date.now()
       };
 
       console.log(
-        "FILE UPLOADED:",
-        lastUpload.filename
+        "Uploaded:",
+        req.file.originalname
       );
 
       res.json({
         success: true,
         filename: req.file.originalname,
-        mimetype: mime,
+        mimetype: req.file.mimetype,
         size: req.file.size,
         url: fileUrl,
-        isImage: isImage,
-        text: text
+        text: text,
+        isImage: isImage
       });
 
     } catch (error) {
@@ -156,15 +146,54 @@ app.post(
       });
 
     }
-
   }
 );
 
 
-// ================================
-// LAST UPLOAD
-// ================================
+// START
+app.post("/api/start", (req, res) => {
 
+  running = true;
+  startedAt = Date.now();
+
+  res.json({
+    success: true,
+    message: "Test server started."
+  });
+
+});
+
+
+// STOP
+app.post("/api/stop", (req, res) => {
+
+  running = false;
+  startedAt = null;
+
+  res.json({
+    success: true,
+    message: "Test server stopped."
+  });
+
+});
+
+
+// STATUS
+app.get("/api/status", (req, res) => {
+
+  res.json({
+    running,
+    startedAt,
+    uptime:
+      running && startedAt
+        ? Date.now() - startedAt
+        : 0
+  });
+
+});
+
+
+// LAST UPLOAD
 app.get("/api/last-upload", (req, res) => {
 
   res.json({
@@ -175,62 +204,18 @@ app.get("/api/last-upload", (req, res) => {
 });
 
 
-// ================================
-// START
-// ================================
-
-app.post("/api/start", (req, res) => {
-
-  running = true;
-  startedAt = Date.now();
+// HEALTH
+app.get("/health", (req, res) => {
 
   res.json({
-    success: true,
-    message: "Server started."
+    online: true,
+    service: "EXIT ARMAN INSIDE"
   });
 
 });
 
 
-// ================================
-// STOP
-// ================================
-
-app.post("/api/stop", (req, res) => {
-
-  running = false;
-  startedAt = null;
-
-  res.json({
-    success: true,
-    message: "Server stopped."
-  });
-
-});
-
-
-// ================================
-// STATUS
-// ================================
-
-app.get("/api/status", (req, res) => {
-
-  res.json({
-    running: running,
-    startedAt: startedAt,
-    uptime:
-      running && startedAt
-        ? Date.now() - startedAt
-        : 0
-  });
-
-});
-
-
-// ================================
-// FACEBOOK WEBHOOK
-// ================================
-
+// FACEBOOK WEBHOOK VERIFY
 app.get("/webhook", (req, res) => {
 
   const mode =
@@ -244,12 +229,9 @@ app.get("/webhook", (req, res) => {
 
   if (
     mode === "subscribe" &&
+    token &&
     token === process.env.VERIFY_TOKEN
   ) {
-
-    console.log(
-      "Facebook webhook verified."
-    );
 
     return res
       .status(200)
@@ -257,22 +239,15 @@ app.get("/webhook", (req, res) => {
 
   }
 
-  res.sendStatus(403);
-
+  return res.sendStatus(403);
 });
 
 
-// ================================
-// FACEBOOK EVENTS
-// ================================
-
+// FACEBOOK WEBHOOK EVENT
 app.post("/webhook", (req, res) => {
 
   console.log(
-    "Facebook webhook event:"
-  );
-
-  console.log(
+    "Webhook event:",
     JSON.stringify(
       req.body,
       null,
@@ -285,28 +260,11 @@ app.post("/webhook", (req, res) => {
 });
 
 
-// ================================
-// HEALTH
-// ================================
-
-app.get("/health", (req, res) => {
-
-  res.json({
-    online: true,
-    service: "EXIT ARMAN Messenger Server"
-  });
-
-});
-
-
-// ================================
-// START SERVER
-// ================================
-
+// SERVER
 app.listen(PORT, () => {
 
   console.log(
-    `EXIT ARMAN server running on port ${PORT}`
+    `EXIT ARMAN INSIDE running on port ${PORT}`
   );
 
 });
