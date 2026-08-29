@@ -19,12 +19,14 @@ const storage = multer.diskStorage({
 
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname);
-    const safeName =
-      Date.now() + "-" +
-      Math.random().toString(36).substring(2, 10) +
+
+    const name =
+      Date.now() +
+      "-" +
+      Math.random().toString(36).substring(2, 9) +
       ext;
 
-    cb(null, safeName);
+    cb(null, name);
   }
 });
 
@@ -37,60 +39,145 @@ const upload = multer({
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
-app.use("/uploads", express.static(uploadDir));
+
+app.use(express.static(path.join(__dirname, "public")));
+
+app.use(
+  "/uploads",
+  express.static(uploadDir)
+);
 
 let running = false;
 let startedAt = null;
 
-// ============================
+let lastUpload = null;
+
+
+// ================================
 // HOME
-// ============================
+// ================================
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(
+    path.join(__dirname, "public", "index.html")
+  );
 });
 
-// ============================
-// FILE UPLOAD
-// ============================
 
-app.post("/api/upload", upload.single("file"), (req, res) => {
-  try {
-    if (!req.file) {
-      return res.status(400).json({
-        success: false,
-        error: "File select nahi ki gayi."
+// ================================
+// UPLOAD
+// ================================
+
+app.post(
+  "/api/upload",
+  upload.single("file"),
+  async (req, res) => {
+
+    try {
+
+      if (!req.file) {
+        return res.status(400).json({
+          success: false,
+          error: "File select nahi ki gayi."
+        });
+      }
+
+      const baseUrl =
+        `${req.protocol}://${req.get("host")}`;
+
+      const fileUrl =
+        `${baseUrl}/uploads/${encodeURIComponent(
+          req.file.filename
+        )}`;
+
+      const mime =
+        req.file.mimetype || "";
+
+      let text = null;
+
+      // ----------------------------
+      // TEXT FILE
+      // ----------------------------
+
+      if (
+        mime.startsWith("text/") ||
+        req.file.originalname.endsWith(".txt") ||
+        req.file.originalname.endsWith(".csv") ||
+        req.file.originalname.endsWith(".json")
+      ) {
+
+        text = fs.readFileSync(
+          req.file.path,
+          "utf8"
+        );
+
+      }
+
+      // ----------------------------
+      // IMAGE
+      // ----------------------------
+
+      const isImage =
+        mime.startsWith("image/");
+
+      lastUpload = {
+        filename: req.file.originalname,
+        storedFilename: req.file.filename,
+        mimetype: mime,
+        size: req.file.size,
+        url: fileUrl,
+        text: text,
+        isImage: isImage,
+        uploadedAt: new Date().toISOString()
+      };
+
+      console.log(
+        "FILE UPLOADED:",
+        lastUpload.filename
+      );
+
+      res.json({
+        success: true,
+        filename: req.file.originalname,
+        mimetype: mime,
+        size: req.file.size,
+        url: fileUrl,
+        isImage: isImage,
+        text: text
       });
+
+    } catch (error) {
+
+      console.error(error);
+
+      res.status(500).json({
+        success: false,
+        error: "Upload failed."
+      });
+
     }
 
-    const baseUrl =
-      `${req.protocol}://${req.get("host")}`;
-
-    const fileUrl =
-      `${baseUrl}/uploads/${encodeURIComponent(req.file.filename)}`;
-
-    console.log("New file uploaded:", fileUrl);
-
-    res.json({
-      success: true,
-      filename: req.file.originalname,
-      url: fileUrl
-    });
-
-  } catch (error) {
-    console.error(error);
-
-    res.status(500).json({
-      success: false,
-      error: "Upload failed."
-    });
   }
+);
+
+
+// ================================
+// LAST UPLOAD
+// ================================
+
+app.get("/api/last-upload", (req, res) => {
+
+  res.json({
+    success: true,
+    upload: lastUpload
+  });
+
 });
 
-// ============================
-// START SERVER STATUS
-// ============================
+
+// ================================
+// START
+// ================================
 
 app.post("/api/start", (req, res) => {
 
@@ -99,13 +186,15 @@ app.post("/api/start", (req, res) => {
 
   res.json({
     success: true,
-    message: "Automation server started."
+    message: "Server started."
   });
+
 });
 
-// ============================
+
+// ================================
 // STOP
-// ============================
+// ================================
 
 app.post("/api/stop", (req, res) => {
 
@@ -114,65 +203,91 @@ app.post("/api/stop", (req, res) => {
 
   res.json({
     success: true,
-    message: "Automation stopped."
+    message: "Server stopped."
   });
+
 });
 
-// ============================
+
+// ================================
 // STATUS
-// ============================
+// ================================
 
 app.get("/api/status", (req, res) => {
 
   res.json({
-    running,
-    startedAt,
+    running: running,
+    startedAt: startedAt,
     uptime:
       running && startedAt
         ? Date.now() - startedAt
         : 0
   });
+
 });
 
-// ============================
-// FACEBOOK WEBHOOK VERIFY
-// ============================
+
+// ================================
+// FACEBOOK WEBHOOK
+// ================================
 
 app.get("/webhook", (req, res) => {
 
-  const mode = req.query["hub.mode"];
-  const token = req.query["hub.verify_token"];
-  const challenge = req.query["hub.challenge"];
+  const mode =
+    req.query["hub.mode"];
+
+  const token =
+    req.query["hub.verify_token"];
+
+  const challenge =
+    req.query["hub.challenge"];
 
   if (
     mode === "subscribe" &&
     token === process.env.VERIFY_TOKEN
   ) {
-    console.log("Facebook webhook verified.");
 
-    return res.status(200).send(challenge);
+    console.log(
+      "Facebook webhook verified."
+    );
+
+    return res
+      .status(200)
+      .send(challenge);
+
   }
 
-  return res.sendStatus(403);
+  res.sendStatus(403);
+
 });
 
-// ============================
-// FACEBOOK WEBHOOK EVENTS
-// ============================
+
+// ================================
+// FACEBOOK EVENTS
+// ================================
 
 app.post("/webhook", (req, res) => {
 
   console.log(
-    "Facebook event:",
-    JSON.stringify(req.body, null, 2)
+    "Facebook webhook event:"
+  );
+
+  console.log(
+    JSON.stringify(
+      req.body,
+      null,
+      2
+    )
   );
 
   res.sendStatus(200);
+
 });
 
-// ============================
-// HEALTH CHECK
-// ============================
+
+// ================================
+// HEALTH
+// ================================
 
 app.get("/health", (req, res) => {
 
@@ -180,11 +295,13 @@ app.get("/health", (req, res) => {
     online: true,
     service: "EXIT ARMAN Messenger Server"
   });
+
 });
 
-// ============================
-// SERVER
-// ============================
+
+// ================================
+// START SERVER
+// ================================
 
 app.listen(PORT, () => {
 
