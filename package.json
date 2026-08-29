@@ -1,7 +1,7 @@
 {
-  "name": "exit-arman-inside",
+  "name": "exit-arman",
   "version": "1.0.0",
-  "description": "EXIT ARMAN INSIDE File Server",
+  "description": "EXIT ARMAN File Server",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
