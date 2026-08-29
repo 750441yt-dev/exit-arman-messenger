@@ -1,24 +1,716 @@
-<div class="section">
-  <div class="section-title">Upload Text File</div>
+<!DOCTYPE html>
+<html lang="en">
 
-  <div class="file-box">
-    <input
-      type="file"
-      id="file"
-      accept=".txt,.csv,.json"
-    >
-  </div>
+<head>
 
-  <br>
+<meta charset="UTF-8">
 
-  <button
-    class="upload"
-    onclick="uploadFile()"
-  >
-    📤 UPLOAD & SEND
-  </button>
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
+
+<title>EXIT ARMAN • Messenger Server</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+
+  font-family:Arial,sans-serif;
+
+  color:white;
+
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      #173c63,
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 90% 90%,
+      #35135d,
+      transparent 35%
+    ),
+    #050812;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:20px;
+}
+
+.container{
+  width:100%;
+  max-width:600px;
+}
+
+.header{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.logo{
+  font-size:38px;
+  font-weight:900;
+  letter-spacing:4px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #55d8ff,
+      #7f6cff,
+      #d85cff
+    );
+
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.subtitle{
+  color:#8997ae;
+  margin-top:8px;
+}
+
+.card{
+  background:rgba(9,14,27,.82);
+
+  border:1px solid
+  rgba(255,255,255,.1);
+
+  border-radius:25px;
+
+  padding:25px;
+
+  backdrop-filter:blur(20px);
+
+  box-shadow:
+    0 30px 80px
+    rgba(0,0,0,.5);
+}
+
+.title{
+  color:#9aa9c0;
+  font-size:13px;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+.filebox{
+  border:1px dashed #40516d;
+
+  background:#080e1b;
+
+  padding:20px;
+
+  border-radius:15px;
+}
+
+input[type=file]{
+  width:100%;
+  color:white;
+}
+
+button{
+  width:100%;
+
+  border:0;
+
+  border-radius:13px;
+
+  padding:15px;
+
+  color:white;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  margin-top:15px;
+}
+
+.upload{
+  background:
+    linear-gradient(
+      135deg,
+      #00a878,
+      #087cff
+    );
+}
+
+.start{
+  background:
+    linear-gradient(
+      135deg,
+      #087cff,
+      #7a43ff
+    );
+}
+
+.stop{
+  background:#1c2535;
+}
+
+.preview{
+  margin-top:20px;
+
+  display:none;
+
+  background:#080e1b;
+
+  padding:15px;
+
+  border-radius:15px;
+}
+
+.preview img{
+  width:100%;
+  max-height:350px;
+  object-fit:contain;
+  border-radius:12px;
+}
+
+.filename{
+  margin-top:12px;
+  color:#b6c5da;
+  word-break:break-word;
+}
+
+.textpreview{
+  margin-top:12px;
+
+  max-height:250px;
+
+  overflow:auto;
+
+  white-space:pre-wrap;
+
+  background:#050912;
+
+  padding:14px;
+
+  border-radius:10px;
+
+  color:#c9d5e5;
+
+  font-family:monospace;
+
+  font-size:13px;
+}
+
+.result{
+  margin-top:15px;
+
+  padding:14px;
+
+  border-radius:12px;
+
+  background:#080e1b;
+
+  color:#9daec6;
+
+  word-break:break-word;
+}
+
+.result a{
+  color:#59cfff;
+}
+
+.status{
+  margin-top:18px;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:14px;
+
+  border-radius:13px;
+
+  background:#080e1b;
+}
+
+.dot{
+  width:10px;
+  height:10px;
+
+  display:inline-block;
+
+  border-radius:50%;
+
+  background:#777;
+
+  margin-right:8px;
+}
+
+.dot.online{
+  background:#20e58a;
+
+  box-shadow:
+    0 0 15px #20e58a;
+}
+
+.footer{
+  text-align:center;
+
+  color:#65728a;
+
+  font-size:12px;
+
+  margin-top:18px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+
+<div class="logo">
+EXIT ARMAN
 </div>
 
-<div id="result" class="result">
-  Select a text file.
+<div class="subtitle">
+Messenger Automation Server
 </div>
+
+</div>
+
+
+<div class="card">
+
+<div class="title">
+Select File
+</div>
+
+<div class="filebox">
+
+<input
+  type="file"
+  id="file"
+  accept="*/*"
+  onchange="previewFile()"
+>
+
+</div>
+
+
+<button
+  class="upload"
+  onclick="uploadFile()"
+>
+📤 UPLOAD FILE
+</button>
+
+
+<div
+  id="preview"
+  class="preview"
+>
+
+<div
+  id="imagePreview"
+>
+</div>
+
+<div
+  id="textPreview"
+  class="textpreview"
+>
+</div>
+
+<div
+  id="filename"
+  class="filename"
+>
+</div>
+
+</div>
+
+
+<div
+  id="result"
+  class="result"
+>
+Select a file.
+</div>
+
+
+<button
+  class="start"
+  onclick="startServer()"
+>
+🚀 START SERVER
+</button>
+
+
+<button
+  class="stop"
+  onclick="stopServer()"
+>
+⏹ STOP SERVER
+</button>
+
+
+<div class="status">
+
+<div>
+
+<span
+  id="dot"
+  class="dot"
+></span>
+
+<span id="statusText">
+OFFLINE
+</span>
+
+</div>
+
+<div id="uptime">
+00:00:00
+</div>
+
+</div>
+
+</div>
+
+
+<div class="footer">
+Design by Exit Arman
+</div>
+
+</div>
+
+
+<script>
+
+let selectedText = "";
+
+
+// ==========================
+// PREVIEW
+// ==========================
+
+async function previewFile(){
+
+  const file =
+    document.getElementById(
+      "file"
+    ).files[0];
+
+  const preview =
+    document.getElementById(
+      "preview"
+    );
+
+  const imagePreview =
+    document.getElementById(
+      "imagePreview"
+    );
+
+  const textPreview =
+    document.getElementById(
+      "textPreview"
+    );
+
+  const filename =
+    document.getElementById(
+      "filename"
+    );
+
+  if(!file){
+
+    preview.style.display =
+      "none";
+
+    return;
+  }
+
+  preview.style.display =
+    "block";
+
+  imagePreview.innerHTML = "";
+
+  textPreview.textContent = "";
+
+  filename.textContent =
+    "📄 " + file.name;
+
+
+  // IMAGE
+
+  if(file.type.startsWith("image/")){
+
+    const url =
+      URL.createObjectURL(file);
+
+    imagePreview.innerHTML =
+      `
+      <img
+        src="${url}"
+        alt="Preview"
+      >
+      `;
+
+    return;
+  }
+
+
+  // TEXT
+
+  if(
+    file.type.startsWith("text/") ||
+    file.name.endsWith(".txt") ||
+    file.name.endsWith(".csv") ||
+    file.name.endsWith(".json")
+  ){
+
+    try{
+
+      selectedText =
+        await file.text();
+
+      textPreview.textContent =
+        selectedText;
+
+    }catch(error){
+
+      textPreview.textContent =
+        "Text read nahi ho saka.";
+
+    }
+
+  }
+
+}
+
+
+// ==========================
+// UPLOAD
+// ==========================
+
+async function uploadFile(){
+
+  const file =
+    document.getElementById(
+      "file"
+    ).files[0];
+
+  const result =
+    document.getElementById(
+      "result"
+    );
+
+  if(!file){
+
+    result.textContent =
+      "❌ Pehle file select karo.";
+
+    return;
+  }
+
+  result.textContent =
+    "Uploading...";
+
+
+  const formData =
+    new FormData();
+
+  formData.append(
+    "file",
+    file
+  );
+
+  formData.append(
+    "message",
+    selectedText
+  );
+
+
+  try{
+
+    const response =
+      await fetch(
+        "/api/upload",
+        {
+          method:"POST",
+          body:formData
+        }
+      );
+
+    const data =
+      await response.json();
+
+
+    if(!response.ok){
+
+      throw new Error(
+        data.error ||
+        "Upload failed"
+      );
+
+    }
+
+
+    result.innerHTML =
+      `
+      ✅ Upload successful<br><br>
+
+      📄 ${data.filename}<br>
+
+      🔗
+      <a
+        href="${data.url}"
+        target="_blank"
+      >
+        Open File
+      </a>
+      `;
+
+
+  }catch(error){
+
+    result.textContent =
+      "❌ " +
+      error.message;
+
+  }
+
+}
+
+
+// ==========================
+// START
+// ==========================
+
+async function startServer(){
+
+  const result =
+    document.getElementById(
+      "result"
+    );
+
+  try{
+
+    const response =
+      await fetch(
+        "/api/start",
+        {
+          method:"POST"
+        }
+      );
+
+    const data =
+      await response.json();
+
+    result.textContent =
+      "✅ " +
+      data.message;
+
+    updateStatus();
+
+  }catch(error){
+
+    result.textContent =
+      "❌ Server error.";
+
+  }
+
+}
+
+
+// ==========================
+// STOP
+// ==========================
+
+async function stopServer(){
+
+  await fetch(
+    "/api/stop",
+    {
+      method:"POST"
+    }
+  );
+
+  updateStatus();
+
+}
+
+
+// ==========================
+// STATUS
+// ==========================
+
+async function updateStatus(){
+
+  try{
+
+    const response =
+      await fetch(
+        "/api/status"
+      );
+
+    const data =
+      await response.json();
+
+    const dot =
+      document.getElementById(
+        "dot"
+      );
+
+    const status =
+      document.getElementById(
+        "statusText"
+      );
+
+    if(data.running){
+
+      dot.classList.add(
+        "online"
+      );
+
+      status.textContent =
+        "SERVER RUNNING";
+
+    }else{
+
+      dot.classList.remove(
+        "online"
+      );
+
+      status.textContent =
+        "OFFLINE";
+
+    }
+
+  }catch(error){
+
+    document.getElementById(
+      "statusText"
+    ).textContent =
+      "ERROR";
+
+  }
+
+}
+
+updateStatus();
+
+</script>
+
+</body>
+
+</html>
